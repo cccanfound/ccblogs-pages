@@ -1,0 +1,111 @@
+<template>
+  <div class="components-container">
+    <div style="margin-top: 15px;" class="title">
+      <div class="title-type">
+        <el-select v-model=type slot="prepend" placeholder="请选择">
+        <el-option label="私密" value="0"></el-option>
+        <el-option label="公开" value="1"></el-option>
+        </el-select>
+      </div>
+      <div class="title-title">
+        <el-input placeholder="请输入标题" v-model="title" class="input-with-select"></el-input>
+      </div>
+    </div>
+    <div class="content">
+      <tinymce v-model="content" :height="400" ></tinymce>
+    </div>
+    <el-button type="primary" @click="commit">提交</el-button>
+    <div class="editor-content" v-html="content" />
+
+  </div>
+</template>
+
+<script>
+  import Tinymce from '@/components/Tinymce'
+  import { addEssay,updateEssay } from "@/api/essay";
+
+    export default {
+      name: "essayEdit",
+      components: { Tinymce },
+      data() {
+        return {
+          id: 'new',
+          type: '',
+          title: '',
+          content: ''
+        }
+      },
+      methods: {
+        commit(){
+          if(this.id!='new'){
+            console.log('update')
+            updateEssay(this.id,this.type,this.title,this.content).then(
+              (res) => {
+                this.loading=false
+                if (res.data.code === 0) {
+                  this.$notify({
+                    title: '更新成功',
+                    duration: 3000
+                  })
+                  //this.$router.push({ path: '/essay/essayCatalog'})
+                } else {
+                  this.$message.error(res.data.msg);
+                }
+              })
+          }
+          else{
+            addEssay(this.type,this.title,this.content).then(
+              (res) => {
+                this.loading=false
+                if (res.data.code === 0) {
+                  this.$notify({
+                    title: '编辑成功',
+                    duration: 3000
+                  })
+                  //this.$router.push({ path: '/essay/essayCatalog'})
+                } else {
+                  this.$message.error(res.data.msg);
+                }
+              })
+          }
+        }
+
+      },
+      mounted() {
+        if(this.$route.query.list!=undefined){
+          console.log(this.$route.query.list)
+          this.type=this.$route.query.list.type
+          this.title=this.$route.query.list.title
+          this.content=this.$route.query.list.content
+          this.id=this.$route.query.list.id
+        }
+      }
+    }
+</script>
+
+<style scoped>
+  .components-container{
+    margin: 20px;
+  }
+  .title{
+    height: 40px;
+  }
+  .title-type{
+    width: 100px;
+    float: left;
+  }
+  .title-title{
+    width: calc(100% - 100px);
+    float: left;
+  }
+  .content{
+    margin-top: 20px;
+  }
+
+</style>
+<style>
+  .tinymce-content p {
+    padding: 0;
+    margin: 2px 0;
+  }
+</style>
