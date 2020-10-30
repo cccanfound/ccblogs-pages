@@ -29,8 +29,7 @@
       },
       methods:{
         edit(){
-          console.log(this.skin)
-          /*this.$router.push({path: '/essay/essayEdit',query: {list:this.list}} )*/
+          this.$router.push({path: '/essay/essayEdit',query: {list:this.list}} )
         },
         showEssay(id){
           getEssay(id).then(

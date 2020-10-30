@@ -140,14 +140,13 @@
   .light .catalog .logo{
     border-bottom: solid black 4px;
   }
-  .dark catalog .logo{
+  .dark .catalog .logo{
     border-bottom: solid #d9d9d9 4px;
   }
   .catalog .logo{
     margin-left: 20px;
     padding-bottom: 10px;
     font-weight: bold;
-
   }
   .catalog .edit{
     padding-left: 20px;
