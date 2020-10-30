@@ -1,12 +1,5 @@
 <template>
   <div class="app" :class="skin">
-    <div class="catalog">
-      <div class="logo">CATALOG</div>
-      <div class="edit" type="text" @click="edit">Edit Catalog</div>
-      <div class="content">
-        <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" ></el-tree>
-      </div>
-    </div>
     <div class="search">
       <div class="logo" >SEARCH</div>
       <div class="edit" >By Title</div>
@@ -20,10 +13,16 @@
         <div v-for="(element,index) in searchData">
           <div class="title-info" v-html="ruleTitle(index)" @click="showEssay(element.id)"></div>
         </div>
-
       </div>
-
     </div>
+    <div class="catalog">
+      <div class="logo">CATALOG</div>
+      <div class="edit" type="text" @click="edit">Edit Catalog</div>
+      <div class="content">
+        <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" ></el-tree>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -122,7 +121,7 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .dark{
   z-index: -100;
   overflow: hidden;
@@ -135,7 +134,12 @@
     margin-top: 30px;
     margin-left: 20px;
     float: left;
-    width: 60%;
+    @media only screen and (min-width: 0px) and (max-width: 600px){
+      width: 80%;
+    }
+    @media only screen and (min-width: 601px) {
+      width: 60%;
+    }
   }
   .light .catalog .logo{
     border-bottom: solid black 4px;
@@ -158,13 +162,19 @@
     margin-top: 15px;
   }
   .search{
-    margin-left: 30px;
+    margin-right: 50px;
     margin-top: 30px;
-      float: left;
-    width: calc(40% - 130px);
+    float: right;
+    padding-right: 20px;
+    @media only screen and (min-width: 0px) and (max-width: 600px){
+      width: 80%;
+      margin-right: calc(20% - 40px);
+    }
+    @media only screen and (min-width: 601px) {
+      width: calc(40% - 130px);
+    }
   }
   .search .edit{
-    padding-left: 20px;
     cursor: pointer;
     margin-top: 15px;
     font-weight: bold;
@@ -176,7 +186,6 @@
     border-bottom: solid #d9d9d9 4px;
   }
   .search .logo{
-    margin-left: 20px;
     padding-bottom: 10px;
     font-weight: bold;
 
@@ -188,13 +197,18 @@
     border: 2px #d9d9d9 solid;
   }
   .search input{
-    margin-left: 20px;
     margin-top: 15px;
     height: 30px;
     width: 60%;
   }
-  .search .content{
-    margin-left: 20px;
+  .dark .search .content{
+    margin-top: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #d9d9d9;
+    line-height: 2;
+  }
+  .light .search .content{
     margin-top: 15px;
     cursor: pointer;
     font-size: 14px;
@@ -207,7 +221,11 @@
   }
 </style>
 <style>
-  .search-text{
+  .dark .search-text{
+    color: white;
+    font-weight: bolder;
+  }
+  .light .search-text{
     color: black;
     font-weight: bolder;
   }

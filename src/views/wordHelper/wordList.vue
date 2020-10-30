@@ -378,6 +378,7 @@
   .drawer{
     height: calc(40vh - 60px);
     overflow-y:auto;
+    overflow-x:hidden;
   }
   .chinese{
     color: #97a8be;
@@ -385,7 +386,7 @@
   .sentence-title{
     border-top: 1px solid #97a8be;
     font-weight: 600;
-    overflow:scroll;
+    overflow:hidden;
     padding-top: 5px;
     padding-left: 20px;
   }

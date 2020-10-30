@@ -56,7 +56,7 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .dark{
     background-color: #181818;
     color: #d9d9d9;
@@ -79,28 +79,45 @@
   .app{
     min-height: 100ch;
     width: 100%;
+    padding-bottom: 50px;
   }
   .content{
     padding-top: 20px;
-    margin-left: 15%;
-    margin-right: 15%;
-    width: 70%;
+    @media only screen and (min-width: 0px) and (max-width: 600px){
+      width: 94%;
+      margin-left: 3%;
+      margin-right: 3%;
+    }
+    @media only screen and (min-width: 601px) {
+      margin-left: 15%;
+      margin-right: 15%;
+      width: 70%;
+    }
   }
   .editor-title{
     margin-right: 10%;
-    padding-bottom: 12px;
+    padding-bottom: 23px;
     font-weight: bolder;
     font-size: 18px;
   }
   .editor-time{
     margin-top: -24px;
     float: right;
-    padding-right: 10px;
-    margin-right: 15%;
+    margin-right: 10%;
     font-weight: bolder;
     font-size: 14px;
   }
   .editor-content{
     margin-top: 20px;
   }
+</style>
+<style lang="scss">
+  .content img{
+    max-width: 100%;
+    @media only screen and (min-width: 0px) and (max-width: 600px){
+      width: auto;
+      height: auto;
+    }
+  }
+
 </style>
