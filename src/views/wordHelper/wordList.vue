@@ -1,6 +1,11 @@
 <template>
+  <div :class="skin">
     <el-container direction="vertical" class="container" v-loading="loading">
       <img :src="slide" class="avatar-slide">
+      <div class="example-app" v-if="ifShow">
+        推荐pc端使用浏览器创建快捷方式或手机端使用此功能
+        <img :src="wordMobile" class="wordMobile">
+      </div>
       <el-header height="22px">
         <div class="mine-num">{{mineNum}} / 5461</div>
         <div class="head-info" @click="openTip"><i class="el-icon-info"></i></div>
@@ -132,6 +137,7 @@
         <div class="addWord" @click="addWord">OK<i class="el-icon-check"></i></div>
       </el-footer>
     </el-container>
+  </div>
 </template>
 
 <script>
@@ -140,8 +146,11 @@
   import memorize from '@/icons/svg/memorize.png'
   import simple from '@/icons/svg/simple.png'
   import slide from '@/icons/svg/slide.png'
+  import wordApp from '@/icons/svg/wordApp.png'
+  import wordMobile from '@/icons/svg/wordMobile.jpg'
   import draggable from 'vuedraggable'
   import {addWord, getWordList, changeWordState, searchSentences} from '@/api/word'
+  import {mapGetters} from "vuex";
     export default {
       name: "wordList",
       components: {
@@ -155,6 +164,8 @@
           memorize: memorize,
           simple: simple,
           slide:slide,
+          wordApp:wordApp,
+          wordMobile:wordMobile,
           //以上图片
           activeIndex :1,  //选项卡
           tabPosition: 'right', //右侧按钮布局
@@ -182,13 +193,23 @@
       computed: {
         //下拉加载下一页的no more显示
         noMore () {
-
           return this.pageInfo.isLastPage[this.activeIndex]
         },
         ////是否禁用下拉加载下一页（防止重复加载）
         disabled () {
           return this.draggableLoading || this.noMore
-        }
+        },
+        ifShow(){
+          const screenWidth = document.body.clientWidth
+          console.log(screenWidth)
+          if(screenWidth>600){
+            return true
+          }
+          return false
+        },
+        ...mapGetters([
+          'skin'
+        ])
       },
       methods: {
         tab(index) {
@@ -340,11 +361,65 @@
         this.getList(2,1)
         this.getList(3,1)
         this.getList(4,1)
+
       }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .dark{
+    background-color: #242424;
+  }
+  .example-app{
+    height: 100%;
+    position: absolute;
+    margin-left: 420px;
+  }
+  .wordApp{
+    float: left;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    display: flex;
+  }
+  .wordMobile
+  {
+    float: left;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    display: flex;
+  }
+  .container{
+    @media only screen and (min-width: 601px) {
+      ::-webkit-scrollbar{
+        width: 10px;  /*滚动条宽度*/
+        height: 100%;  /*滚动条高度*/
+      }
+      width: 350px;
+      .avatar-slide{
+        position: absolute;
+        margin-left: 182px;
+        width: 84px;
+        height: 100%;
+        pointer-events: none;
+      }
+    }
+    @media only screen and (min-width: 0px) and (max-width: 600px) {
+      ::-webkit-scrollbar{
+        width: 10px;  /*滚动条宽度*/
+        height: 100%;  /*滚动条高度*/
+      }
+      .avatar-slide{
+        position: absolute;
+        margin-left: 58%;
+        width: 21%;
+        height: 100%;
+        pointer-events: none;
+      }
+    }
+
+  }
   .drawer-type{
     width: 30px;
   }
@@ -379,9 +454,6 @@
     height: calc(40vh - 60px);
     overflow-y:auto;
     overflow-x:hidden;
-  }
-  .chinese{
-    color: #97a8be;
   }
   .sentence-title{
     border-top: 1px solid #97a8be;
@@ -418,13 +490,7 @@
     padding-left: 23px;
 
   }
-  .avatar-slide{
-    position: absolute;
-    margin-left: 58%;
-    width: 21%;
-    height: 100%;
-    pointer-events: none;
-  }
+
   .board-item{
     line-height: 32px;
     margin: 6px 0;
@@ -433,8 +499,8 @@
     font-family: sans-serif;
     height: 32px;
     border-radius: 10px;
-    background-color: #e6eaef;
   }
+
   .block{
     width:100%;
   }
@@ -443,21 +509,15 @@
     height: calc(100vh - 122px);
     width: 100%;
   }
-  .up{
-    border-radius: 15px;
-    box-shadow: 4px 4px 6px #d1d9e6c7, -2px -2px 6px #fafafa;
-  }
-  .down{
-    border-radius: 15px;
-    box-shadow: inset 6px 6px 9px #d1d9e6cc, inset -6px -6px 9px #fff;
-  }
+
   .side-item{
     overflow-x: hidden;
     overflow-y: hidden;
-    height: 22%;
     width: 70%;
-    margin: 10px 16% 10px 8%;
-
+    height: 20%;
+    margin: 20px 16% 20px 8%;
+    /*height: 22%;
+    margin: 10px 16% 10px 8%;*/
   }
   .random{
     margin-right: 10px;
@@ -468,7 +528,6 @@
     margin-top: 7px;
     float: left;
     margin-left: 10px;
-    color: #97a8be;
     font-size: 14px;
   }
   .head-info{
@@ -483,14 +542,9 @@
     height: calc(100vh - 122px);
     width: 79%;
     overflow: hidden;
-    background: #ecf0f3;
     float: left;
   }
-  .mine-footer{
-    background: #ecf0f3;
-  }
   .mine-aside{
-    background: #ecf0f3;
     height: calc(100vh - 122px);
     float: right;
     width: 21%;
@@ -500,26 +554,102 @@
     width: 100%;
     text-align: center;
   }
-  .draggable-bottom{
-    color: #ecf0f3;
-  }
   p{
     margin: 1px 0;
+  }
+  .light{
+    .mine-num{
+      color: #97a8be;
+    }
+    .chinese{
+      color: #97a8be;
+    }
+    .up{
+      border-radius: 15px;
+      box-shadow: 4px 4px 6px #d1d9e6c7, -2px -2px 6px #fafafa;
+    }
+    .down{
+      border-radius: 15px;
+      box-shadow: inset 6px 6px 9px #d1d9e6cc, inset -6px -6px 9px #fff;
+    }
+    .mine-aside {
+      background: #ecf0f3;
+    }
+    .mine-footer{
+      background: #ecf0f3;
+    }
+    .board-item{
+      background-color: #e6eaef;
+    }
+    .mine-container{
+      background: #ecf0f3;
+    }
+    .draggable-bottom{
+      color: #ecf0f3;
+    }
+  }
+  .dark{
+    .el-icon-sort{
+      color: #eae9e9;
+    }
+    .el-icon-info{
+      color: #eae9e9;
+    }
+    .mine-num{
+      color: #d9d9d9;
+    }
+    .chinese{
+      color: #eae9e9;
+    }
+    .up{
+      border-radius: 15px;
+      box-shadow: 4px 4px 6px #111111, -2px -2px 6px #505050;
+    }
+    .down{
+      border-radius: 15px;
+      box-shadow: inset 4px 4px 9px #111111, inset -4px -4px 9px #505050;
+    }
+    .mine-aside {
+      background:  #333333;
+    }
+    .mine-footer{
+      background:  #333333;
+    }
+    .board-item{
+      background-color: #242424;
+      margin-bottom: 5px;
+      /*margin-bottom: 12px;
+      border-radius: 15px;
+      box-shadow: 4px 4px 6px #111111, -2px -2px 6px #505050;*/
+      color: #d9d9d9;
+    }
+    .mine-container{
+      background: #333333;
+    }
+    .draggable-bottom{
+      color: #333333;
+    }
   }
 </style>
 <style>
   .el-footer{
     padding-right: 0;
   }
-  .el-header{
-    background-color: black;
+  .dark .el-header{
+    background-color: #333333;
   }
-
-  .el-header{
-    background: #ecf0f3;
-  }
-  .el-drawer{
+  .light .el-header{
     background-color: #ecf0f3;
+  }
+  .dark .el-drawer__header {
+    color: #eae9e9;
+  }
+  .light .el-drawer{
+    background-color: #ecf0f3;
+  }
+  .dark .el-drawer{
+    background-color: #242424;
+    color: #d9d9d9;
   }
   .el-drawer :focus {
     outline: 0;
@@ -533,7 +663,10 @@
   .el-notification{
     width : 200px;
   }
-  .el-slider__bar{
+  .dark .el-slider__bar{
+    background-color: #909090;
+  }
+  .light .el-slider__bar{
     background-color: #97a8be;
   }
   .el-slider__button{
