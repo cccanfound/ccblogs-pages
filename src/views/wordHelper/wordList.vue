@@ -20,7 +20,7 @@
                 group="wordDrag"
                 filter=".un-draggable"
                 id="content1">
-                <div v-for="(element,index) in list1" :key="element.id" class="board-item" :id="element.id" @click="openDrawer(1,index,element.word_id)">
+                <div v-for="(element,index) in list1" :key="element.id" class="board-item" :id="element.id" @click="openDrawer(1,index,element.word_id,element.id)">
                   {{ element.content }}
                 </div>
               </draggable>
@@ -33,7 +33,7 @@
                 class="board-column-content"
                 group="wordDrag"
                 id="content2">
-                <div v-for="(element,index) in list2" :key="element.id" class="board-item" :id="element.id" @click="openDrawer(2,index,element.word_id)">
+                <div v-for="(element,index) in list2" :key="element.id" class="board-item" :id="element.id" @click="openDrawer(2,index,element.word_id,element.id)">
                   {{ element.content }}
                 </div>
               </draggable>
@@ -46,7 +46,7 @@
                 class="board-column-content"
                 group="wordDrag"
                 id="content3">
-                <div v-for="(element,index) in list3" :key="element.id" class="board-item" :id="element.id" @click="openDrawer(3,index,element.word_id)">
+                <div v-for="(element,index) in list3" :key="element.id" class="board-item" :id="element.id" @click="openDrawer(3,index,element.word_id,element.id)">
                   {{ element.content }}
                 </div>
               </draggable>
@@ -59,7 +59,7 @@
                 class="board-column-content"
                 group="wordDrag"
                 id="content4">
-                <div v-for="(element,index) in list4" :key="element.id" class="board-item" :id="element.id" @click="openDrawer(4,index,element.word_id)">
+                <div v-for="(element,index) in list4" :key="element.id" class="board-item" :id="element.id" @click="openDrawer(4,index,element.word_id,element.id)">
                   {{ element.content }}
                 </div>
               </draggable>
@@ -70,6 +70,7 @@
           </div>
         </div>
         <el-drawer
+          :before-close="closeDrawer"
           :title="title"
           :show-close="false"
           :visible.sync="drawer"
@@ -151,6 +152,7 @@
   import draggable from 'vuedraggable'
   import {addWord, getWordList, changeWordState, searchSentences} from '@/api/word'
   import {mapGetters} from "vuex";
+  const $ = require('jquery');
     export default {
       name: "wordList",
       components: {
@@ -172,6 +174,8 @@
           sel:1,
           drawer: false,//抽屉打开关闭
           direction: 'btt',//抽屉打开方向
+          tableIndex:'',
+          wordIndex: '',
           title: "", //抽屉标题
           phonetic:"",  //抽屉音标
           announce:"",  //抽屉发音
@@ -211,6 +215,11 @@
           'skin'
         ])
       },
+/*      watch: {
+        title(val, oldVal) {//普通的watch监听
+          console.log("a: " + val, oldVal);
+        }
+      },*/
       methods: {
         tab(index) {
           this.activeIndex = index
@@ -253,7 +262,10 @@
             console.log(error)
           }
         },
-        openDrawer(tableIndex, wordIndex,id) {
+        openDrawer(tableIndex, wordIndex,wordId,id) {
+          $('#'+id).addClass('onChoose')
+          this.tableIndex=tableIndex
+          this.wordIndex=id
           this.title = this['list' + tableIndex][wordIndex].content
           this.phonetic = this['list' + tableIndex][wordIndex].phonetic
           this.announce = this['list' + tableIndex][wordIndex].announce
@@ -261,7 +273,7 @@
           this.explaination = this['list' + tableIndex][wordIndex].explaination
           this.video = new Audio(this.announce)
           this.drawer = true
-          searchSentences(id).then(
+          searchSentences(wordId).then(
             (res) => {
               this.loading=false
               if (res.data.code === 0) {
@@ -270,7 +282,12 @@
                 this.$message.error('失败，请联系管理员');
               }
             })
-
+        },
+        closeDrawer(done){
+          if(this.wordIndex!=''){
+            $('#'+this.wordIndex).removeClass('onChoose')
+          }
+          done()
         },
         read() {
           let audio = this.video
@@ -367,6 +384,7 @@
 </script>
 
 <style scoped lang="scss">
+
   .dark{
     background-color: #242424;
   }
@@ -603,6 +621,7 @@
     }
     .up{
       border-radius: 15px;
+      /*box-shadow: 4px 4px 6px #1f1f1f, -2px -2px 6px #474747;*/
       box-shadow: 4px 4px 6px #111111, -2px -2px 6px #505050;
     }
     .down{
@@ -616,11 +635,12 @@
       background:  #333333;
     }
     .board-item{
-      background-color: #242424;
-      margin-bottom: 5px;
-      /*margin-bottom: 12px;
-      border-radius: 15px;
-      box-shadow: 4px 4px 6px #111111, -2px -2px 6px #505050;*/
+      /*background-color: #242424;
+      margin-bottom: 5px;*/
+      margin-left: 10px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      box-shadow: 2px 2px 6px #1f1f1f, -2px -2px 6px #484848;
       color: #d9d9d9;
     }
     .mine-container{
@@ -632,6 +652,12 @@
   }
 </style>
 <style>
+  .dark .onChoose{
+    box-shadow: inset 4px 4px 9px #1f1f1f, inset -3px -3px 9px #484848 !important;
+  }
+  .dark .avatar-slide{
+    filter: brightness(40%);
+  }
   .el-footer{
     padding-right: 0;
   }
