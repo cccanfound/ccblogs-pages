@@ -7,7 +7,7 @@
         <img :src="wordMobile" class="wordMobile">
       </div>
       <el-header height="22px">
-        <div class="mine-num">{{mineNum}} / 5461</div>
+        <div class="mine-num">{{numInfo[activeIndex-1]}} / {{mineNum}} / 5461</div>
         <div class="head-info" @click="openTip"><i class="el-icon-info"></i></div>
         <div class="random" @click="randomly"><i class="el-icon-sort"></i></div>
       </el-header>
