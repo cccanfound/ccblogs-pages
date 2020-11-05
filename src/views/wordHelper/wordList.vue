@@ -197,6 +197,7 @@
       computed: {
         //下拉加载下一页的no more显示
         noMore () {
+          console.log(this.pageInfo.isLastPage[this.activeIndex])
           return this.pageInfo.isLastPage[this.activeIndex]
         },
         ////是否禁用下拉加载下一页（防止重复加载）
@@ -246,9 +247,9 @@
                 });
               }
               //记录四个选项卡单词数量
-              this.numInfo[type-1]=result.data.data.total
+              this.$set(this.numInfo,type-1,result.data.data.total)
               this.mineNum = this.numInfo[0]+this.numInfo[1]+this.numInfo[2]+this.numInfo[3]
-              this.pageInfo.isLastPage[type]=result.data.data.isLastPage
+              this.$set(this.pageInfo.isLastPage,type,result.data.data.isLastPage)
               this.pageInfo.pageNum[type]=result.data.data.pageNum
               this.loading=false
               this.draggableLoading = false
@@ -368,6 +369,7 @@
         load () {
           this.draggableLoading = true
           setTimeout(() => {
+            console.log(this.activeIndex,this.pageInfo.pageNum[this.activeIndex])
             this.getList(this.activeIndex, this.pageInfo.pageNum[this.activeIndex]+1)
 
           }, 2000)
