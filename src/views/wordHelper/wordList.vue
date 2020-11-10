@@ -344,6 +344,8 @@
         add(evt) {
           let fromId = evt.from.id.charAt(evt.from.id.length - 1)
           let toId = evt.to.id.charAt(evt.to.id.length - 1)
+          this.$set(this.numInfo,parseInt(fromId)-1,this.numInfo[parseInt(fromId)-1]-1)
+          this.$set(this.numInfo,parseInt(toId)-1,this.numInfo[parseInt(toId)-1]+1)
           let result = this['list' + fromId].find(d => d.id == evt.item.id)
           //使用draggable的oldIndex如果本身列表移动过会带来很多不一致问题。所以目前只能采用遍历自定义id实现
           this['list' + fromId].some((item, i) => {
