@@ -5,7 +5,7 @@
     <div class="content">
       <div class="editor-title" v-html="list.title" />
       <div class="editor-time" v-html="list.createTime" />
-      <div class="editor-content" v-html="list.content" />
+      <div id="content" class="editor-content" v-html="list.content" />
     </div>
   </div>
 </template>
@@ -16,29 +16,47 @@
     const $ = require('jquery');
 
     export default {
-        name: "essayContent",
+      name: "essayContent",
       data() {
         return {
-          list:{}
+          detailInfo: {},
+          list: ""
         }
       },
-      computed:{
+      computed: {
         ...mapGetters([
           'skin'
         ])
       },
-      methods:{
-        edit(){
-          this.$router.push({path: '/essay/essayEdit',query: {list:this.list}} )
+//nextTick方法，意思是在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+      watch: {
+        list: function () {
+          this.$nextTick(function () {
+            import("./prismcolor.css")
+            import("./prism.js")
+            Prism.highlightAllUnder(document.getElementById("content"));
+          })
+        }
+      },
+        methods: {
+        edit() {
+          this.$router.push({path: '/essay/essayEdit', query: {list: this.list}})
         },
-        showEssay(id){
+        showEssay(id) {
           getEssay(id).then(
             (res) => {
-              this.loading=false
+              this.loading = false
               if (res.data.code === 0) {
-                this.list=res.data.data
-                this.list.createTime=this.list.createTime.substring(0,10)+'&nbsp&nbsp'+this.list.createTime.substring(14,19)
-                console.log(this.list)
+                this.list = res.data.data
+                this.list.createTime = this.list.createTime.substring(0, 10) + '&nbsp&nbsp' + this.list.createTime.substring(14, 19)
+                let t;
+               /* clearTimeout(t)
+                t = setTimeout(function (){
+                  import("./prism.css")
+                  import("./prism.js")
+
+                }, 3000);*/
+
               } else {
                 this.$notify({
                   title: res.data.msg
@@ -46,16 +64,16 @@
               }
             })
         },
-        back(){
-          this.$router.push({ path: '/essay/essayCatalog' })
+        back() {
+          this.$router.push({path: '/essay/essayCatalog'})
         },
       },
       mounted() {
         this.showEssay(this.$route.query.id)
+
       }
     }
 </script>
-
 <style scoped lang="scss">
   .dark{
     background-color: #181818;
@@ -111,6 +129,7 @@
     margin-top: 20px;
   }
 </style>
+
 <style lang="scss">
   .content img{
     max-width: 100%;
@@ -120,4 +139,7 @@
     }
   }
 
+
+
 </style>
+

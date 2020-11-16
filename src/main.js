@@ -20,6 +20,14 @@ import $ from 'jquery'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+/*import hljs from 'highlight.js'
+import 'highlight.js/styles/dracula.css' //样式文件
+Vue.directive('highlight',function (el) {
+  let blocks = el.querySelectorAll('pre code');
+  blocks.forEach((block)=>{
+    hljs.highlightBlock(block)
+  })
+})*/
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
