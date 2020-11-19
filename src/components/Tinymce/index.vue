@@ -19,7 +19,9 @@ import load from './dynamicLoadScript'
 import {devServer} from "../../../vue.config";
 
 // why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
-const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js'
+/*const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js'*/
+//官网cdn，速度可能会慢一些。但版本新一些，选择使用，上方时旧版但加载速度快
+const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce@5.3.1/tinymce.min.js'
 
 export default {
   name: 'Tinymce',
@@ -112,16 +114,17 @@ export default {
         }
         this.initTinymce()
       })
+
     },
     initTinymce() {
       const _this = this
       window.tinymce.init({
         selector: `#${this.tinymceId}`,
         paste_webkit_styles: true,
-        language: this.languageTypeList['en'],
+        /*language: this.languageTypeList['zh'],*/
         height: this.height,
         body_class: 'panel-body ',
-        object_resizing: false,
+        /*object_resizing: false,*/
         toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
         menubar: this.menubar,
         plugins: plugins,

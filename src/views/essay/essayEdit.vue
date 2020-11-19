@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="content">
-      <tinymce v-model="content" :height="400" ></tinymce>
+      <tinymce v-model="content" :height="520" ></tinymce>
     </div>
     <el-button type="primary" @click="commit">提交</el-button>
     <div class="editor-content" v-html="content" />
