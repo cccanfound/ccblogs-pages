@@ -71,7 +71,11 @@
       methods:{
         handleNodeClick(data) {
           if(data.id!=undefined){
-            this.$router.push({path: '/essay/essayContent',query:{id:data.id+''}})
+            let {href} = this.$router.resolve({
+              path: '/essay/essayContent',
+              query:{id:data.id+''}
+            })
+            window.open(href, '_blank');
           }
         },
         showEssay(id) {

@@ -642,9 +642,10 @@
       /*background-color: #242424;
       margin-bottom: 5px;*/
       margin-left: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       border-radius: 12px;
-      box-shadow: 2px 2px 6px #1f1f1f, -2px -2px 6px #484848;
+      background: #2b2b2b;
+      /*box-shadow: 2px 2px 6px #1f1f1f, -2px -2px 6px #484848;*/
       color: #d9d9d9;
     }
     .mine-container{
@@ -657,7 +658,8 @@
 </style>
 <style>
   .dark .onChoose{
-    box-shadow: inset 4px 4px 9px #1f1f1f, inset -3px -3px 9px #484848 !important;
+    background: #434343 !important;
+    /*box-shadow: inset 4px 4px 9px #1f1f1f, inset -3px -3px 9px #484848 !important;*/
   }
   .dark .avatar-slide{
     filter: brightness(40%);

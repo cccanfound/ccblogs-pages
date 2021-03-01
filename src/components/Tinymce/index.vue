@@ -124,6 +124,7 @@ export default {
         /*language: this.languageTypeList['zh'],*/
         height: this.height,
         body_class: 'panel-body ',
+        /*skin: 'oxide-dark',*/
         /*object_resizing: false,*/
         toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
         menubar: this.menubar,
@@ -139,7 +140,7 @@ export default {
         link_title: false,
         images_upload_url: devServer.proxy["/"].target+'/api/v1/pub/img/upload',
         images_upload_base_path: '/img/',
-        content_style: "p {margin: 4px 0;line-height: 22px;}",
+        content_style: "p {margin: 4px 0;line-height: 22px;} ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;} ",
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
         init_instance_callback: editor => {
           if (_this.value) {
