@@ -138,7 +138,7 @@
     li {margin: 4px; list-style-type: none;}
     color: #29b83f;
   }
-  h1,h2,h3 {font-weight:normal;font-size:16px;line-height: 22px;margin: 4px;}
+  h1,h2,h3,h4 {font-weight:normal;font-size:16px;line-height: 22px;margin: 2px;}
   .content img{
     max-width: 100%;
     @media only screen and (min-width: 0px) and (max-width: 600px){

@@ -149,7 +149,7 @@ export default {
         link_title: false,
         images_upload_url: devServer.proxy["/"].target+'/api/v1/pub/img/upload',
         images_upload_base_path: '/img/',
-        content_style: "p {margin: 4px 0;line-height: 22px;} ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;} h1,h2,h3 {font-weight:normal;font-size:16px;line-height: 22px;margin: 6px;}",
+        content_style: "p {margin: 4px 0;line-height: 22px;} ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;} h1,h2,h3,h4 {font-weight:normal;font-size:16px;line-height: 22px;margin: 2px;}",
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
         init_instance_callback: editor => {
           if (_this.value) {
