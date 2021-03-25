@@ -21,7 +21,9 @@ import {devServer} from "../../../vue.config";
 // why use this cdn, detail see https://github.com/PanJiaChen/tinymce-all-in-one
 /*const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js'*/
 //官网cdn，速度可能会慢一些。但版本新一些，选择使用，上方时旧版但加载速度快
-const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce@5.3.1/tinymce.min.js'
+/*const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce@5.3.1/tinymce.min.js'*/
+//本地,增加自定义插件所以取消使用cdn
+const tinymceCDN = window.location.origin + '/tinymce/tinymce.min.js'
 
 export default {
   name: 'Tinymce',
@@ -46,7 +48,10 @@ export default {
     },
     menubar: {
       type: String,
-      default: 'file edit insert view format table'
+      default: 'file edit insert view format table test'
+    },
+    menu : {
+      test: {title: 'Test Menu', items: 'newdocument'}
     },
     height: {
       type: [Number, String],
@@ -112,6 +117,7 @@ export default {
           this.$message.error(err.message)
           return
         }
+        window.tinymce.baseURL = window.location.origin + '/tinymce'
         this.initTinymce()
       })
 
@@ -127,7 +133,10 @@ export default {
         /*skin: 'oxide-dark',*/
         /*object_resizing: false,*/
         toolbar: this.toolbar.length > 0 ? this.toolbar : toolbar,
-        menubar: this.menubar,
+        menubar: 'file edit insert view format table formats',
+        menu : {
+          test: {title: 'Formats', items: 'formats'}
+        },
         plugins: plugins,
         end_container_on_empty_block: true,
         powerpaste_word_import: 'clean',
@@ -140,7 +149,7 @@ export default {
         link_title: false,
         images_upload_url: devServer.proxy["/"].target+'/api/v1/pub/img/upload',
         images_upload_base_path: '/img/',
-        content_style: "p {margin: 4px 0;line-height: 22px;} ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;} ",
+        content_style: "p {margin: 4px 0;line-height: 22px;} ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;} h1,h2,h3 {font-weight:normal;font-size:16px;line-height: 22px;margin: 6px;}",
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin
         init_instance_callback: editor => {
           if (_this.value) {

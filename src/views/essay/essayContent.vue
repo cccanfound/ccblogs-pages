@@ -30,13 +30,13 @@
       },
 //nextTick方法，意思是在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
       watch: {
-        list: function () {
+        /*list: function () {
           this.$nextTick(function () {
             import("./prismcolor.css")
             import("./prism.js")
             Prism.highlightAllUnder(document.getElementById("content"));
           })
-        }
+        }*/
       },
         methods: {
         edit() {
@@ -75,6 +75,7 @@
     }
 </script>
 <style scoped lang="scss">
+
   .dark{
     background-color: #181818;
     color: #d9d9d9;
@@ -131,6 +132,13 @@
 </style>
 
 <style lang="scss">
+  p {margin: 4px 0;line-height: 22px;}
+  ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;}
+  .catl{
+    li {margin: 4px; list-style-type: none;}
+    color: #29b83f;
+  }
+  h1,h2,h3 {font-weight:normal;font-size:16px;line-height: 22px;margin: 4px;}
   .content img{
     max-width: 100%;
     @media only screen and (min-width: 0px) and (max-width: 600px){
