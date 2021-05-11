@@ -1,13 +1,15 @@
 <template>
   <div class="app" :class="skin">
-    <el-button icon="el-icon-back" circle size="small"  @click="back"></el-button>
-    <el-button class="edit" type="text" @click="edit">Edit</el-button>
+    <el-button icon="el-icon-back" circle size="small"  @click="back" v-if="$route.query.visible=='yes'"></el-button>
+    <el-button class="edit" type="text" @click="edit" v-if="$route.query.visible=='yes'">Edit</el-button>
     <div class="content">
       <div class="editor-title" v-html="list.title" />
       <div class="editor-time" v-html="list.createTime" />
       <div id="content" class="editor-content" v-html="list.content" />
     </div>
+    <el-backtop></el-backtop>
   </div>
+
 </template>
 
 <script>
@@ -70,7 +72,7 @@
       },
       mounted() {
         this.showEssay(this.$route.query.id)
-
+        console.log(this.$route.query)
       }
     }
 </script>

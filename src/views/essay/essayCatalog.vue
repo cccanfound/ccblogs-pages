@@ -73,14 +73,14 @@
           if(data.id!=undefined){
             let {href} = this.$router.resolve({
               path: '/essay/essayContent',
-              query:{id:data.id+''}
+              query:{id:data.id+'',visible:'yes'}
             })
             window.open(href, '_blank');
           }
         },
         showEssay(id) {
           if(id!=undefined) {
-            this.$router.push({path: '/essay/essayContent', query: {id: id + ''}})
+            this.$router.push({path: '/essay/essayContent', query: {id: id + '' ,visible:'yes'}})
           }
         },
         edit() {

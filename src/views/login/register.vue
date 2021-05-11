@@ -2,6 +2,7 @@
   <div class="regist">
     <el-form ref="ruleForm" class="register-form" :model="ruleForm" :rules="loginRules">
       <h3>Register</h3>
+      <h3>暂不开放注册，如需注册请联系博主</h3>
       <el-form-item prop="userName">
         <el-input v-model="ruleForm.userName" placeholder="Username" />
       </el-form-item>
@@ -74,6 +75,10 @@ export default {
   },
   methods: {
     submitForm(formName, ruleForm) {
+      this.$alert("", '暂不开放注册，如需注册请联系博主', {
+        confirmButtonText: '确定'
+      })
+      return ;
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // alert('submit!')

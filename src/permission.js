@@ -54,7 +54,17 @@ router.beforeEach(async(to, from, next) => {
     } else if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()
-    } else {
+    }
+    //查看首页放行
+    else if (to.path === '/dashboard' ) {
+      // in the free login whitelist, go directly
+      next()
+    }
+    //查看文章放行
+    else if (to.path === '/essay/essayContent' ) {
+      // in the free login whitelist, go directly
+      next()
+    }else {
       // other pages that do not have permission to access are redirected to the login page.
       next(`/login?redirect=${to.path}`)
       NProgress.done()

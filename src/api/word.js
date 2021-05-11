@@ -1,11 +1,14 @@
 import request from '@/utils/request'
 
+export const getDashBoardList = (page) => request.post('/api/v1/pub/dashboard/list', {
+  'limit':20,
+  'page':page
+})
 export const getWordList = (type,page) => request.post('/api/v1/pri/word/list', {
   'type': type+'',
   'limit':20,
   'page':page
-}
-)
+})
 export const addWord = (number) => request.post('/api/v1/pri/word/addWord', {
   'number': number+''
 })

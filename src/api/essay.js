@@ -6,7 +6,7 @@ export const addEssay = (type,title,content) => request.post('/api/v1/pri/essay/
   'content': content
 })
 
-export const getEssay = (id) => request.post('/api/v1/pri/essay/getEssay', {
+export const getEssay = (id) => request.post('/api/v1/pub/essay/getEssay', {
   'essayId': id
 })
 
