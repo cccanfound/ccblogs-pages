@@ -1,20 +1,17 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">{{ changeName }}</div>
-    <el-row v-loading="loading">
-      <el-col :span="8" v-for="(element,index) in list" :key="index" >
-        <el-card :body-style="{ padding: '0px' }" style="width: 80%;">
-          <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-          <div style="padding: 14px;">
-            <span>{{ element.title }}</span>
-            <div class="bottom clearfix">
-              <time class="time">{{ element.create_time }}</time>
-              <el-button type="text" class="button" @click="show(element.id)">查看</el-button>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+    <div v-loading="loading" v-for="(element,index) in list" :key="index">
+      <div class="card" @click="show(element.id)">
+        <div :style="element.picture==undefined?'':{backgroundImage: 'url(' + element.picture + ')'}" class="image"></div>
+        <div class="desc">
+          <div @mouseenter="enter" @mouseleave="leave" class="title">{{ element.title }}</div>
+          <div class="time">{{ element.create_time }}</div>
+          <div class="auth">auth:{{ element.username }}</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -46,10 +43,9 @@ export default {
               title: '暂时还没有文章'
             })
           }
-          this.list=result.data.data.list;
+          this.list=result.data.data.list
           this.loading = false;
           console.log(this.list)
-          //记录四个选项卡单词数量
         } else {
           this.$message({
             type: 'error',
@@ -64,14 +60,19 @@ export default {
       if(id!=undefined) {
         this.$router.push({path: '/essay/essayContent', query: {id: id + '',visible:'no'}})
       }
+    },
+    enter: function(e){
+      e.target.className='title-hover'
+    },
+    leave: function(e){
+      e.target.className='title'
     }
   },
   mounted() {
-    this.getDashBoard(1)
-    if(mapGetters.name.length!=0){
-      this.changeName = mapGetters.name
+    if(this.name.length!=0){
+      this.changeName='欢迎你呀，'+this.name
     }
-
+    this.getDashBoard(1)
   }
 }
 </script>
@@ -79,21 +80,66 @@ export default {
 <style lang="scss" scoped>
 .dashboard {
   &-container {
-    margin: 30px;
+    margin: 10px;
   }
   &-text {
     font-size: 30px;
     line-height: 46px;
   }
 }
-.el-col-8{
-  width: 25%;
-  margin-bottom: 30px;
+.card{
+  @media only screen and (min-width: 601px) {
+    margin-top: 20px;
+    margin-left: 40px;
+    width: 150px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    float: left;
+    height: 290px;
+  }
+  @media only screen and (min-width: 0px) and (max-width: 600px) {
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(33% - 20px);
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    float: left;
+    height: 230px;
+  }
 }
-
+.image {
+  @media only screen and (min-width: 601px) {
+    height: 200px;
+    width: 100%;
+    background-size: 100%;
+  }
+  @media only screen and (min-width: 0px) and (max-width: 600px) {
+    height: 150px;
+    width: 100%;
+    background-size: 100%;
+  }
+}
+.desc{
+  margin: 14px;
+}
+.title{
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.title-hover{
+  width: 100%;
+  font-size: 13px;
+}
 .time {
   font-size: 13px;
   color: #999;
+}
+.auth {
+  font-size: 13px;
+  color: #999;
+  float: right;
 }
 
 .bottom {
@@ -106,10 +152,7 @@ export default {
   float: right;
 }
 
-.image {
-  width: 100%;
-  display: block;
-}
+
 
 .clearfix:before,
 .clearfix:after {

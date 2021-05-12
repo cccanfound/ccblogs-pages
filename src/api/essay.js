@@ -23,11 +23,12 @@ export const delEssay = (id,catalogData) => request.post('/api/v1/pri/essay/delE
   'data': catalogData
 })
 
-export const updateEssay = (id,type,title,content) => request.post('/api/v1/pri/essay/updateEssay', {
+export const updateEssay = (id,type,title,content,picture) => request.post('/api/v1/pri/essay/updateEssay', {
   'id': id,
   'type': type,
   'title': title,
-  'content': content
+  'content': content,
+  'picture': picture
 })
 
 export const searchEssay = (info) => request.post('/api/v1/pri/essay/searchEssay', {

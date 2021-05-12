@@ -51,6 +51,7 @@
               if (res.data.code === 0) {
                 this.list = res.data.data
                 this.list.createTime = this.list.createTime.substring(0, 10) + '&nbsp&nbsp' + this.list.createTime.substring(14, 19)
+                console.log(this.list)
                 let t;
                /* clearTimeout(t)
                 t = setTimeout(function (){
