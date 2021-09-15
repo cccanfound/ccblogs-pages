@@ -135,6 +135,12 @@
 </style>
 
 <style lang="scss">
+  blockquote{
+    border-left: 2px solid #ccc;
+    margin-left: 1.5rem;
+    padding-left: 1rem;
+  }
+
   p {margin: 4px 0;line-height: 22px;}
   ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;}
   .catl{

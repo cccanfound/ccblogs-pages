@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">{{ changeName }}</div>
+    <div class="text"><p>{{ changeName }}</p><p>移动端可长按标题显示超长部分</p></div>
     <div v-loading="loading" v-for="(element,index) in list" :key="index">
       <div class="card" @click="show(element.id)">
         <div :style="element.picture==undefined?'':{backgroundImage: 'url(' + element.picture + ')'}" class="image"></div>
@@ -78,6 +78,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .text{
+    margin-left: 10px;
+    font-size: 13px;
+    color: #999;
+    margin-bottom: -20px;
+    line-height: 2px;
+  }
 .dashboard {
   &-container {
     margin: 10px;
@@ -104,6 +111,12 @@ export default {
     box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
     float: left;
     height: 230px;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
   }
 }
 .image {
@@ -119,25 +132,29 @@ export default {
   }
 }
 .desc{
-  margin: 14px;
+  @media only screen and (min-width: 601px) {
+    margin: 14px;
+    font-size: 13px;
+}
+  @media only screen and (min-width: 0px) and (max-width: 600px) {
+    margin: 8px;
+    font-size: 12px;
+  }
+
 }
 .title{
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 13px;
 }
 .title-hover{
   width: 100%;
-  font-size: 13px;
 }
 .time {
-  font-size: 13px;
   color: #999;
 }
 .auth {
-  font-size: 13px;
   color: #999;
   float: right;
 }
