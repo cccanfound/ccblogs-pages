@@ -13,7 +13,7 @@ import store from './store'
 import router from './router'
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
-
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
 
 import $ from 'jquery'
 
@@ -42,7 +42,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, { zhLocale })
+//英文
+//Vue.use(ElementUI, { local })
+
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 

@@ -5,7 +5,7 @@
     <div class="content">
       <div class="editor-title" v-html="list.title" />
       <div class="editor-time" v-html="list.createTime" />
-      <div id="content" class="editor-content" v-html="list.content" />
+      <div id="content" class="editor-content line-numbers" v-html="list.content" />
     </div>
     <el-backtop></el-backtop>
   </div>
@@ -32,13 +32,15 @@
       },
 //nextTick方法，意思是在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
       watch: {
-        /*list: function () {
+        list: function () {
           this.$nextTick(function () {
-            import("./prismcolor.css")
-            import("./prism.js")
-            Prism.highlightAllUnder(document.getElementById("content"));
+            // import("./prismcolor.css")
+            // import("./prism.js")
+            import("./prismnew.css")
+            import("./prismnew.js")
+            //Prism.highlightAllUnder(document.getElementById("content"));
           })
-        }*/
+        }
       },
         methods: {
         edit() {
@@ -53,12 +55,6 @@
                 this.list.createTime = this.list.createTime.substring(0, 10) + '&nbsp&nbsp' + this.list.createTime.substring(14, 19)
                 console.log(this.list)
                 let t;
-               /* clearTimeout(t)
-                t = setTimeout(function (){
-                  import("./prism.css")
-                  import("./prism.js")
-
-                }, 3000);*/
 
               } else {
                 this.$notify({
@@ -131,7 +127,9 @@
   }
   .editor-content{
     margin-top: 20px;
+    padding: 0 20px;
   }
+
 </style>
 
 <style lang="scss">
@@ -157,6 +155,4 @@
   }
 
 
-
 </style>
-

@@ -197,7 +197,6 @@
       computed: {
         //下拉加载下一页的no more显示
         noMore () {
-          console.log(this.pageInfo.isLastPage[this.activeIndex])
           return this.pageInfo.isLastPage[this.activeIndex]
         },
         ////是否禁用下拉加载下一页（防止重复加载）

@@ -106,7 +106,7 @@ export const constantRoutes = [
         path: 'essayCatalog',
         name: 'essayCatalog',
         component: () => import('@/views/essay/essayCatalog'),
-        meta: { title: 'essayCatalog', icon: 'tree' }
+        meta: { title: 'Catalog', icon: 'tree' }
       },
       {
         path: 'essayContent',
@@ -117,7 +117,7 @@ export const constantRoutes = [
         path: 'essayEdit',
         name: 'essayEdit',
         component: () => import('@/views/essay/essayEdit'),
-        meta: { title: 'essayEdit', icon: 'tree' }
+        meta: { title: 'Edit', icon: 'tree' }
       },
       {
         path: 'essayCatalogEdit',
@@ -127,7 +127,28 @@ export const constantRoutes = [
     ]
 
   },
+  {
+    path: '/status',
+    component: Layout,
+    redirect: '/status/statusIndex',
+    name: 'status',
+    meta: { title: 'status', icon: 'form' },
+    children: [
+      {
+        path: 'statusIndex',
+        name: 'statusIndex',
+        component: () => import('@/views/status/statusIndex'),
+        meta: { title: 'Index', icon: 'form' }
+      },
+      {
+        path: 'groupEdit',
+        name: 'groupEdit',
+        component: () => import('@/views/status/groupEdit'),
+        meta: { title: 'Manager', icon: 'tree' }
+      }
+    ]
 
+  },
 
 
 
