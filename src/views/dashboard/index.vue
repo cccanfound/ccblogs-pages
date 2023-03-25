@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-container">
+  <div class="dashboard-container" :class="skin">
     <div class="text"><p>{{ changeName }}</p><p>移动端可长按标题显示超长部分</p></div>
     <div v-loading="loading" v-for="(element,index) in list" :key="index">
       <div class="card" @click="show(element.id)">
@@ -23,7 +23,8 @@ export default {
   name: 'Dashboard',
   computed: {
     ...mapGetters([
-      'name'
+      'name',
+      'skin'
     ])
   },
   data() {
@@ -33,6 +34,7 @@ export default {
       changeName: "如需使用其他功能，请先登陆"
     }
   },
+
   methods: {
     async getDashBoard(page) {
       try {
@@ -78,6 +80,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .dark{
+    z-index: -100;
+    overflow: hidden;
+    width: 100%;
+    min-height: calc(100vh - 50px);
+    background-color: #242424;
+    color: #d9d9d9;
+  }
   .text{
     margin-left: 10px;
     font-size: 13px;
@@ -87,7 +97,7 @@ export default {
   }
 .dashboard {
   &-container {
-    margin: 10px;
+    padding: 10px;
   }
   &-text {
     font-size: 30px;

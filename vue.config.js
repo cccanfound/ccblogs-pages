@@ -40,8 +40,8 @@ module.exports = {
     proxy: {
       '/': {
         //设置代理
-        //target: 'http://127.0.0.1:8060',
-        target: 'http://106.55.157.221:80',
+        target: 'http://127.0.0.1:8060',
+        // target: 'http://106.55.157.221:80',
         changeOrigin: true,
         secure: true, //如果是http接口，需要配置该参数
       }

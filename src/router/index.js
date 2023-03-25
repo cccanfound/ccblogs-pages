@@ -149,7 +149,40 @@ export const constantRoutes = [
     ]
 
   },
+  {
+    path: '/music',
+    component: Layout,
+    redirect: '/music/musicContainer',
+    name: 'music',
+    meta: { title: 'music', icon: 'form' },
+    children: [
+      {
+        path: 'musicIndex',
+        name: 'musicIndex',
+        component: () => import('@/views/music/musicIndex'),
+        meta: { title: 'index', icon: 'tree' }
+      },
+      {
+        path: 'musicContainer',
+        name: 'musicContainer',
+        component: () => import('@/views/music/musicContainer'),
+        meta: { title: 'player', icon: 'form' }
+      },
+      {
+        path: 'personal',
+        name: 'personal',
+        component: () => import('@/views/music/personal'),
+        meta: { title: 'personal', icon: 'tree' }
+      },
+      {
+        path: 'manage',
+        name: 'manage',
+        component: () => import('@/views/music/manage'),
+        meta: { title: 'manage', icon: 'tree' }
+      }
+    ]
 
+  },
 
 
   // 404 page must be placed at the end !!!
