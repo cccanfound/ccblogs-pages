@@ -46,27 +46,44 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-    if (to.path === '/' +
-      'register') {
-      // if is logged in, redirect to the home page
-      next()
-      NProgress.done()
-    } else if (whiteList.indexOf(to.path) !== -1) {
+    if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly
       next()
     }
-    //查看首页放行
-    else if (to.path === '/dashboard' ) {
+    //现在不开放注册
+    // else if (to.path === '/' +
+    //   'register') {
+    //   // if is logged in, redirect to the home page
+    //   next()
+    //   NProgress.done()
+    // }
+    /**
+     * 曾经版本的处理方式，现在引入新的主页了
+     */
+    // //查看首页放行
+    // else if (to.path === '/dashboard' ) {
+    //   // in the free login whitelist, go directly
+    //   next()
+    // }
+    // //查看文章放行
+    // else if (to.path === '/essay/essayContent' ) {
+    //   // in the free login whitelist, go directly
+    //   next()
+    // }else {
+    //   // other pages that do not have permission to access are redirected to the login page.
+    //   next(`/login?redirect=${to.path}`)
+    //   NProgress.done()
+    // }
+    else if (to.path === '/indexForCustomer' ) {
       // in the free login whitelist, go directly
       next()
     }
-    //查看文章放行
-    else if (to.path === '/essay/essayContent' ) {
+    else if (to.path === '/contentForCustomer' ) {
       // in the free login whitelist, go directly
       next()
-    }else {
-      // other pages that do not have permission to access are redirected to the login page.
-      next(`/login?redirect=${to.path}`)
+    }
+    else{
+      next(`/indexForCustomer`)
       NProgress.done()
     }
   }
