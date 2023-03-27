@@ -73,10 +73,17 @@
   .ccTopSticky {
     width: 100%;;
     height: 75px;
-    overflow:hidden;
     /*background-color: #07090d;*/
     position: fixed;
-
+    overflow: hidden;
+    /*border*/
+    border-bottom: 2px solid;
+    /*border-image: -webkit-linear-gradient(90deg,#6772FF, #51E2F7) 5 10;*/
+    /*border-image: -moz-linear-gradient(90deg,#6772FF, #51E2F7) 5 10;*/
+    /*border-image: linear-gradient(90deg,#6772FF, #51E2F7) 5 10;*/
+    border-image: -webkit-linear-gradient(90deg,#6772FF, #55f79c) 5 10;
+    border-image: -moz-linear-gradient(90deg,#6772FF, #55f79c) 5 10;
+    border-image: linear-gradient(90deg,#6772FF, #55f79c) 5 10;
   }
 
   .ccTopStickyUp {
