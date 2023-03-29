@@ -147,7 +147,7 @@ export default {
         imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io'],
         default_link_target: '_blank',
         link_title: false,
-        images_upload_url: devServer.proxy["/"].target+'/api/v1/pri/img/uploadEssayImg',
+        images_upload_url: devServer.proxy["/"].target+'/api/v1/pub/img/uploadEssayImg',
         images_upload_base_path: '/img/essay/',
         content_style: "p {margin: 4px 0;line-height: 22px;} ul {margin-top: 0;margin-bottom: 0;padding-top: 0;padding-bottom: 0;} h1,h2,h3,h4 {font-weight:normal;font-size:16px;line-height: 22px;margin: 2px;}",
         nonbreaking_force_tab: true, // inserting nonbreaking space &nbsp; need Nonbreaking Space Plugin

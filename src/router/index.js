@@ -54,11 +54,11 @@ export const constantRoutes = [
     component: () => import('@/views/forCustomer/index'),
     hidden: true
   },
-  // {
-  //   path: '/contentForCustomer',
-  //   component: () => import('@/views/forCustomer/content'),
-  //   hidden: true
-  // },
+  {
+    path: '/contentForCustomer',
+    component: () => import('@/views/forCustomer/essay'),
+    hidden: true
+  },
   {
     path: '/',
     component: Layout,
