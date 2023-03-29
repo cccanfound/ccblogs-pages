@@ -22,9 +22,9 @@
     </cc-top-sticky>
 
     <!--弹出联系方式-->
-    <!--    <div class="contact">-->
-    <!--      <svg-icon icon-class="turn-right" class-name="turnRightIcon"/>-->
-    <!--    </div>-->
+        <div class="contact">
+          <svg-icon icon-class="turn-right" class-name="turnRightIcon"/>
+        </div>
 
 
     <!--内容头部-->
@@ -44,13 +44,13 @@
       <div style="height: 35px;margin: 10px auto;width:fit-content;">
         <span class="follow">FOLLOW ME:</span>
         <div style="padding-top: 15px;display: inline-block">
-          <svg-icon icon-class="weChat" @mouseover="handleOver(0)" @mouseleave="handleLeave(0)"
+          <svg-icon icon-class="weChat" @click="showContact('weChat')" @mouseover="handleOver(0)" @mouseleave="handleLeave(0)"
                     :class="iconHover[0]?'iconHover':''" class-name="connectIcon"/>
-          <svg-icon icon-class="email" @mouseover="handleOver(1)" @mouseleave="handleLeave(1)"
+          <svg-icon icon-class="email" @click="showContact('weChat')" @mouseover="handleOver(1)" @mouseleave="handleLeave(1)"
                     :class="iconHover[1]?'iconHover':''" class-name="connectIcon"/>
-          <svg-icon icon-class="qq" @mouseover="handleOver(2)" @mouseleave="handleLeave(2)"
+          <svg-icon icon-class="qq" @click="showContact('weChat')" @mouseover="handleOver(2)" @mouseleave="handleLeave(2)"
                     :class="iconHover[2]?'iconHover':''" class-name="connectIcon"/>
-          <svg-icon icon-class="phone" @mouseover="handleOver(3)" @mouseleave="handleLeave(3)"
+          <svg-icon icon-class="phone" @click="showContact('weChat')" @mouseover="handleOver(3)" @mouseleave="handleLeave(3)"
                     :class="iconHover[3]?'iconHover':''" class-name="connectIcon"/>
         </div>
       </div>
@@ -116,27 +116,11 @@
       return {
         iconHover: [false, false, false, false],
         articleList: [
-          {title: 11111111111111111, picture: './11.jpg', author: 11111111, time: 1111111111},
-          {title: 22222222222, picture: './22.jpg', author: 22222222222, time: 22222222222},
-          {title: 3333333333, picture: './44.jpg', author: 3333333333, time: 3333333333},
-          {title: 4444444444444, picture: './33.jpg', author: 4444444444444, time: 4444444444444},
-          {title: 555555555, picture: './favicon.png', author: 555555555, time: 555555555},
-          {
-            title: 6666666666666666666666666666,
-            picture: './favicon.png',
-            author: 6666666666666666666666666666,
-            time: 6666666666666666666666666666
-          },
-          {title: 777777777777, picture: './favicon.png', author: 777777777777, time: 777777777777},
-          {title: 8888888888888888, picture: './favicon.png', author: 8888888888888888, time: 8888888888888888},
-          {title: 999999999999999, picture: './favicon.png', author: 999999999999999, time: 999999999999999},
-          {title: 12121212121212, picture: './favicon.png', author: 12121212121212, time: 12121212121212},
-          {title: 999999999999999, picture: './favicon.png', author: 999999999999999, time: 999999999999999},
-          {title: 999999999999999, picture: './favicon.png', author: 999999999999999, time: 999999999999999},
-          {title: 999999999999999, picture: './favicon.png', author: 999999999999999, time: 999999999999999},
-          {title: 1111111, picture: './favicon.png', author: 11111111, time: 1111111111},
-          {title: 1111111, picture: './favicon.png', author: 11111111, time: 1111111111},
-          {title: 999999999999999, picture: './favicon.png', author: 999999999999999, time: 999999999999999}
+          {title: 1, picture: './11.jpg', author: 1, time: 1},
+          {title: 2, picture: './22.jpg', author: 2, time: 2},
+          {title: 3, picture: './44.jpg', author: 3, time: 3},
+          {title: 4, picture: './33.jpg', author: 4, time: 4},
+          {title: 555555555, picture: './favicon.png', author: 555555555, time: 555555555}
         ],
         input: '',
         contentHeadImg: './for-customer-head.png',
@@ -151,6 +135,9 @@
     computed: {},
     watch: {},
     methods: {
+      showContact(type){
+
+      },
       show(id){
         if(id!=undefined) {
           this.$router.push({path: '/contentForCustomer', query: {id: id + ''}})
@@ -203,7 +190,7 @@
   $light_gray: #eee;
 
   .turnRightIcon {
-    margin-top: 45px;
+    margin-top: 65px;
     height: 28px;
     width: 28px;
     fill: white;
@@ -212,9 +199,9 @@
   .contact {
     position: fixed;
     right: 0;
-    top: 15%;
+    top: 17%;
     width: 200px;
-    height: 120px;
+    height: 160px;
     background-color: #218bff;
     border-radius: 10px 0px 0px 10px;
 
